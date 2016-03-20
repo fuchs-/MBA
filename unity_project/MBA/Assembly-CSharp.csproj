@@ -47,8 +47,11 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Controller\MapController.cs" />
      <Compile Include="Assets\Scripts\Controller\MouseController.cs" />
+     <Compile Include="Assets\Scripts\Controller\TileMapController.cs" />
+     <Compile Include="Assets\Scripts\Model\Position.cs" />
      <Compile Include="Assets\Scripts\Model\Tile.cs" />
-     <Compile Include="Assets\Scripts\Model\TileFloor.cs" />
+     <Compile Include="Assets\Scripts\Model\TileCreationData.cs" />
+     <Compile Include="Assets\Scripts\Model\TileFactory.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

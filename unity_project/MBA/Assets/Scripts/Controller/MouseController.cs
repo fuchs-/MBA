@@ -3,25 +3,72 @@ using System.Collections;
 
 public class MouseController : MonoBehaviour {
 
+	//this prevents getting the camera on every single frame
+	private Camera camera;
+
+	//position of the camera on the last frame
+	private Vector3 lastMousePosition;
+
+
+	//Zoom limits
+	private static int minZoom = 3, maxZoom = 8;
+
+	void Start()
+	{
+		camera = Camera.main;
+
+
+	}
+
 	void Update () {
-		Vector3 mp = Input.mousePosition;
-		mp = Camera.main.ScreenToWorldPoint (mp);
 
-		int x = Mathf.FloorToInt (mp.x);
-		int y = Mathf.FloorToInt (mp.y);
+		//Calculate if the player is trying to drag the camera
+		checkCameraDrag ();
 
-		//This is just sad, terrible...
-		//TODO Make this right
-		GameObject map;
-		map = GameObject.FindGameObjectWithTag ("Map");
+		//Calculate if the player is trying to zoom in/out
+		calculateCameraZoom();
 
-		MapController mc = map.GetComponent<MapController> ();
-		Tile t;
-		t = mc.getTile (x, y);
+		//Highlighting tile under the mouse
+		MapController.mapController.highlightPosition (getMouseUnitPosition ());
 
-		if (t != null)
-			Debug.Log ("Mouse over tile: (" + t.x + "," + t.y + ")");
-		else
-			Debug.Log ("Mouse over no tile");
+		lastMousePosition = getMouseWorldPosition ();
+	}
+
+	private void checkCameraDrag()
+	{
+		
+		if (Input.GetMouseButton(1)) {
+
+			Vector3 drag = lastMousePosition - getMouseWorldPosition();
+
+			camera.transform.Translate(drag);
+		}
+	}
+
+	private void calculateCameraZoom()
+	{
+		camera.orthographicSize -= Input.mouseScrollDelta.y;
+
+		if (camera.orthographicSize < minZoom)
+			camera.orthographicSize = minZoom;
+		if (camera.orthographicSize > maxZoom)
+			camera.orthographicSize = maxZoom;
+	}
+
+	private Vector3 getMouseUnitPosition()
+	{
+		Vector3 mp = getMouseWorldPosition ();
+
+		mp.x = Mathf.Floor (mp.x);
+		mp.y = Mathf.Floor (mp.y);
+		mp.z = 0;
+
+		return mp;
+	}
+
+	//Returns mouse position relative to the world
+	private Vector3 getMouseWorldPosition()
+	{
+		return camera.ScreenToWorldPoint (Input.mousePosition);
 	}
 }

@@ -1,70 +1,47 @@
-﻿ using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class MapController : MonoBehaviour {
 
-	Tile[,] tileMap;
+	/// <summary>
+	/// THERE CAN BE ONLY ONE
+	/// </summary>
+	public static MapController mapController;
 
-	//size of the map in tiles
+	//size of the map in units/positions
 	public int width, height;
+
+
+	//Tile Highlighting
+	private GameObject tileHighlightPrefab;
+	private GameObject tileHighlight;
 
 	void Start () {
 
-		tileMap = new Tile[width, height];
-
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < height; y++) {
-				if (x == 0 || y == 0 || x == width-1 || y == height-1)	
-					changeTileAtPosition (x, y, TileTypes.Empty);
-				else 
-					changeTileAtPosition (x, y, TileTypes.Floor);
-			}
-		}
-
-		Debug.Log ("Map created: " + width + "x" + height);
-		Debug.Log (width * height + " total tiles");
-	}
-
-	public Tile getTile(int x, int y)
-	{
-		if (x < 0 || x >= width || y < 0 || y >= height) {
-			Debug.LogError ("Trying to reach out of range tile: (" + x + "," + y + ")");
-			return null;
-		} else {
-			return tileMap [x, y];
-		}
-	}
-
-	public void changeTileAtPosition(int x, int y, TileTypes type)
-	{
-		Tile t = tileMap [x, y];
-		if (t != null)
-			t.destroy ();
-
-		switch (type) {
-		case TileTypes.Empty:
-			t = new Tile (x, y);
-			break;
-		case TileTypes.Floor:
-			t = new TileFloor (x, y);
-			break;
-		default:
-			Debug.LogError ("Tile type: " + type + " not implemented in method MapController.changeTileAtPosition()");
+		//THERE CAN BE ONLY ONE
+		if (mapController != null && mapController != this) {
+			Destroy (this.gameObject);
 			return;
 		}
 
-		tileMap [x, y] = t;
+		mapController = this;
+
+		TileMapController.tileMapController.CreateTileMap ();
+
+		tileHighlightPrefab = (GameObject) Resources.Load ("TileHighlight");
 	}
 
-	public void RandomizeTiles()
+
+	//Tile Highlighting
+	public void highlightPosition(Vector3 position)
 	{
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < height; y++) {
-				if (Random.Range (0, 2) == 1)
-					changeTileAtPosition (x, y, TileTypes.Floor);
-				else
-					changeTileAtPosition (x, y, TileTypes.Empty);
-			}
-		}
+		if (position.x < 0 || position.x >= this.width) 	//Mouse is to the left/right of the map
+			return;
+		if (position.y < 0 || position.y >= this.height)	//Mouse is bellow/above the map
+			return;
+		
+		Destroy (tileHighlight);
+
+		tileHighlight = (GameObject)Instantiate (tileHighlightPrefab, position, Quaternion.identity);
 	}
 }
