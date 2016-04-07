@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Controller\GameController.cs" />
+     <Compile Include="Assets\Scripts\Controller\HeroesController.cs" />
      <Compile Include="Assets\Scripts\Controller\MapController.cs" />
      <Compile Include="Assets\Scripts\Controller\MouseController.cs" />
      <Compile Include="Assets\Scripts\Controller\TileMapController.cs" />

@@ -11,6 +11,9 @@ public class MapController : MonoBehaviour {
 	//size of the map in units/positions
 	public int width, height;
 
+	public TileMapController tileMap;
+	public HeroesController heroes;
+
 
 	//Tile Highlighting
 	private GameObject tileHighlightPrefab;
@@ -24,15 +27,36 @@ public class MapController : MonoBehaviour {
 		}
 		mapController = this;
 
-		GameObject heroes_go = GameObject.Find ("Heroes");
-		if(heroes_go) 
-		{
-			heroes_go.transform.SetParent (this.transform);
+		GameObject tileMap_go = transform.FindChild ("TileMap").gameObject;
+		if (tileMap_go) {
+			tileMap = tileMap_go.GetComponent<TileMapController> ();
+		} else {
+			Debug.LogError ("TileMap not found");
 		}
 
-		TileMapController.tileMapController.CreateTileMap ();
+		GameObject heroes_go = GameObject.Find ("Heroes");
+		if (heroes_go) {
+			heroes_go.transform.SetParent (this.transform);
+			heroes = heroes_go.GetComponent<HeroesController> ();
+		} else {
+			Debug.LogError ("Heroes GameObject not found");
+		}
+
+		tileMap.CreateTileMap ();
+		heroes.CreateHeroMap ();
 
 		tileHighlightPrefab = (GameObject) Resources.Load ("TileHighlight");
+	}
+
+	public void MouseClickedAtPosition(Position p)
+	{
+		Hero h;
+		h = heroes.getHeroAtPosition (p);
+
+		//There's a hero at this position, I should tell the GameController
+		if (h) {
+			GameController.gameController.HeroClicked (h);
+		}
 	}
 
 
@@ -48,6 +72,5 @@ public class MapController : MonoBehaviour {
 			tileHighlight = (GameObject)Instantiate (tileHighlightPrefab, position.vector3, Quaternion.identity);
 		else
 			tileHighlight.transform.position = position.vector3;
-		
 	}
 }

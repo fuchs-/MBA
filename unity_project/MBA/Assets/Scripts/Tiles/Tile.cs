@@ -68,7 +68,7 @@ public class Tile {
 			visualTile = value;
 			visualTile.name = "Tile_" + x + "_" + y;
 			visualTile.transform.position = position.vector3;
-			visualTile.transform.parent = TileMapController.tileMapController.transform;
+			visualTile.transform.parent = MapController.mapController.tileMap.transform;
 		}
 	}
 

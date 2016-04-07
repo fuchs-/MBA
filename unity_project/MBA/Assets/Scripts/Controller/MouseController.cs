@@ -47,7 +47,6 @@ public class MouseController : MonoBehaviour {
 
 	private void checkCameraDrag()
 	{
-		
 		if (Input.GetMouseButton(1)) {
 
 			Vector3 drag = lastMousePosition - getMouseWorldPosition();
@@ -77,6 +76,8 @@ public class MouseController : MonoBehaviour {
 			if (getMouseUnitPosition () == lastMouseButtonDown) {
 				//clicked a position on the map
 				//Debug.Log("Clicked " + lastMouseButtonDown.ToString());
+
+				MapController.mapController.MouseClickedAtPosition (lastMouseButtonDown);
 			}
 		}
 	}

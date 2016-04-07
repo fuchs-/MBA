@@ -2,10 +2,7 @@
 
 public class TileMapController : MonoBehaviour {
 
-	/// <summary>
-	/// THERE CAN BE ONLY ONE
-	/// </summary>
-	public static TileMapController tileMapController;
+	//public static TileMapController tileMapController;
 
 	public Tile[,] tiles;
 	private TileFactory tileFactory;
@@ -14,6 +11,7 @@ public class TileMapController : MonoBehaviour {
 
 	void Start()
 	{
+		/* This used to be a singleton, now it's on the MapController
 		//THERE CAN BE ONLY ONE
 		if (tileMapController != null && tileMapController != this) {
 			Destroy (gameObject);
@@ -21,12 +19,11 @@ public class TileMapController : MonoBehaviour {
 		}
 
 		tileMapController = this;
+		*/
 	}
 
 	public void CreateTileMap()
 	{
-
-
 		this.width = MapController.mapController.width;
 		this.height = MapController.mapController.height;
 
