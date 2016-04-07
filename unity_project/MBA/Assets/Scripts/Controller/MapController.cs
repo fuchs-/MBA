@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class MapController : MonoBehaviour {
 
@@ -17,14 +17,18 @@ public class MapController : MonoBehaviour {
 	private GameObject tileHighlight;
 
 	void Start () {
-
 		//THERE CAN BE ONLY ONE
 		if (mapController != null && mapController != this) {
 			Destroy (this.gameObject);
 			return;
 		}
-
 		mapController = this;
+
+		GameObject heroes_go = GameObject.Find ("Heroes");
+		if(heroes_go) 
+		{
+			heroes_go.transform.SetParent (this.transform);
+		}
 
 		TileMapController.tileMapController.CreateTileMap ();
 
@@ -33,15 +37,17 @@ public class MapController : MonoBehaviour {
 
 
 	//Tile Highlighting
-	public void highlightPosition(Vector3 position)
+	public void highlightPosition(Position position)
 	{
 		if (position.x < 0 || position.x >= this.width) 	//Mouse is to the left/right of the map
 			return;
 		if (position.y < 0 || position.y >= this.height)	//Mouse is bellow/above the map
 			return;
 		
-		Destroy (tileHighlight);
-
-		tileHighlight = (GameObject)Instantiate (tileHighlightPrefab, position, Quaternion.identity);
+		if (!tileHighlight)
+			tileHighlight = (GameObject)Instantiate (tileHighlightPrefab, position.vector3, Quaternion.identity);
+		else
+			tileHighlight.transform.position = position.vector3;
+		
 	}
 }

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class TileMapController : MonoBehaviour {
 
@@ -26,6 +25,8 @@ public class TileMapController : MonoBehaviour {
 
 	public void CreateTileMap()
 	{
+
+
 		this.width = MapController.mapController.width;
 		this.height = MapController.mapController.height;
 
@@ -49,8 +50,12 @@ public class TileMapController : MonoBehaviour {
 	public void changeTileAtPosition(int x, int y, TileTypes type)
 	{
 		Tile t = tiles [x, y];
-		if (t != null)
+
+		if (t != null) {
+			if (t.type == type)	return;
+
 			t.destroy ();
+		}
 
 		t = tileFactory.MakeTile (x, y, type);
 
@@ -89,7 +94,7 @@ public class TileMapController : MonoBehaviour {
 				if (Random.Range (0, 2) == 1)
 					changeTileAtPosition (x, y, TileTypes.Floor);
 				else
-					changeTileAtPosition (x, y, TileTypes.Wall);
+					changeTileAtPosition (x, y, TileTypes.Water);
 			}
 		}
 	}

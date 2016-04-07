@@ -1,0 +1,4 @@
+W/H = 238 px
+X/Y = 9 px
+Stroke = 7 pt
+Radius 25 px
