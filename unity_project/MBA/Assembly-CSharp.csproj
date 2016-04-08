@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\Controller\MapController.cs" />
      <Compile Include="Assets\Scripts\Controller\MouseController.cs" />
      <Compile Include="Assets\Scripts\Controller\TileMapController.cs" />
+     <Compile Include="Assets\Scripts\Controller\UIController.cs" />
      <Compile Include="Assets\Scripts\Entities\Entity.cs" />
      <Compile Include="Assets\Scripts\Entities\Hero.cs" />
      <Compile Include="Assets\Scripts\Entities\Skill.cs" />

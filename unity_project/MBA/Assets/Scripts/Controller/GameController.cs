@@ -13,7 +13,8 @@ public class GameController : MonoBehaviour {
 	/// </summary>
 	public static GameController gameController;
 
-	Hero selected;
+	public Hero selectedHero
+	;
 	GameStates gameState;
 
 	void Start()
@@ -31,11 +32,11 @@ public class GameController : MonoBehaviour {
 	public void HeroClicked(Hero h)
 	{
 		if (gameState == GameStates.Attacking) {
-			selected.attack (h);
+			selectedHero.attack (h);
 			gameState = GameStates.StandBy;
 		} 
 		else {
-			selected = h;
+			selectedHero = h;
 
 			Debug.Log (h.gameObject.name + " was selected");
 		}

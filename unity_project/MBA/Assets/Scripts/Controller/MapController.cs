@@ -56,6 +56,11 @@ public class MapController : MonoBehaviour {
 		//There's a hero at this position, I should tell the GameController
 		if (h) {
 			GameController.gameController.HeroClicked (h);
+		} else {
+			//TODO: check for other stuff like movement or other entities
+			//For now, I'll just unselect the hero
+
+			GameController.gameController.selectedHero = null;
 		}
 	}
 
