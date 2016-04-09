@@ -2,7 +2,7 @@
 
 public class HeroesController : MonoBehaviour {
 
-	public Hero[] heroes;
+	private Hero[] heroes;
 
 	private int[,] heroMap;
 	private int width, height;
@@ -14,7 +14,19 @@ public class HeroesController : MonoBehaviour {
 
 		heroMap = new int[width, height];
 	
+		initializeHeroes ();
 		buildHeroMap ();
+	}
+
+	private void initializeHeroes()
+	{
+		heroes = new Hero[transform.childCount];
+
+		for (int i = 0; i < heroes.Length; i++) {
+			
+			heroes [i] = transform.GetChild (i).GetComponent<Hero>();
+			heroes [i].Initialize ();
+		}
 	}
 
 	private void buildHeroMap()

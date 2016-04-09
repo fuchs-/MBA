@@ -40,10 +40,7 @@ public class UIController : MonoBehaviour {
 			attackButton.interactable = true;
 
 		selectedHeroText.text = currentHeroData.Name;
-
-		if (hudData.charImg != null) {
 		
-			this.charImg.sprite = hudData.charImg;
-		}
+		this.charImg.sprite = hudData.charImg;
 	}
 }

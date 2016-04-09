@@ -12,7 +12,7 @@ public class Hero : Entity {
 	public Teams team;
 
 	private HUDData hudData;
-	public Sprite charImg;
+	private Sprite charImg;
 
 	//More stuff here: titles, effects
 
@@ -83,8 +83,9 @@ public class Hero : Entity {
 
 	//--------------------------------------------------End of Hero stats
 
-	void Start()
+	public void Initialize()
 	{
+		//Getting map coordinates based on position
 		this.x = Mathf.FloorToInt(this.transform.position.x);
 		this.y = Mathf.FloorToInt(this.transform.position.y);
 
@@ -99,6 +100,10 @@ public class Hero : Entity {
 			teamHighlight.name = "TeamHighlight";
 			teamHighlight.transform.parent = this.transform;
 		}
+
+
+		//HUD STUFF
+		charImg = Resources.Load<Sprite>("Heroes/" + gameObject.name + "/char");
 
 		hudData = new HUDData (gameObject.name);
 
