@@ -11,14 +11,17 @@ public class Hero : Entity {
 
 	public Teams team;
 
+	private HUDData hudData;
+	public Sprite charImg;
+
+	//More stuff here: titles, effects
+
 	//--------------------------------------------------Hero stats
 
 	//Basics
 	private int level;
 	private int experience;
 	public bool isMage; //Mages are heroes whose auto-attack is magic
-
-	//More stuff here: titles, effects
 
 
 	public int Level { get { return level; } }
@@ -96,6 +99,10 @@ public class Hero : Entity {
 			teamHighlight.name = "TeamHighlight";
 			teamHighlight.transform.parent = this.transform;
 		}
+
+		hudData = new HUDData (gameObject.name);
+
+		updateHUDData ();
 	}
 
 	private void levelUp()
@@ -117,9 +124,17 @@ public class Hero : Entity {
 		//I guess I'm gonna have a static dictionary where the key is hero level and the value is the necessary experience
 	}
 
-
-	public void updateTeamHighlight()
+	private void updateHUDData()
 	{
-		
+		hudData.HP = this.HP;
+		hudData.maxHP = this.maxHP;
+		hudData.MP = this.MP;
+		hudData.maxMP = this.maxMP;
+		hudData.charImg = this.charImg;
+	}
+
+	public HUDData getHUDData()
+	{
+		return hudData;
 	}
 }

@@ -60,7 +60,9 @@ public class MapController : MonoBehaviour {
 			//TODO: check for other stuff like movement or other entities
 			//For now, I'll just unselect the hero
 
-			GameController.gameController.selectedHero = null;
+
+			GameController.gameController.selectedHero = null; // This should PROOOOBABLY not be here (Probably should be done in GameController)
+			UIController.UI.updateHeroData(new HUDData());
 		}
 	}
 

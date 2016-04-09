@@ -38,7 +38,7 @@ public class GameController : MonoBehaviour {
 		else {
 			selectedHero = h;
 
-			Debug.Log (h.gameObject.name + " was selected");
+			UIController.UI.updateHeroData (h.getHUDData ());
 		}
 	}
 
