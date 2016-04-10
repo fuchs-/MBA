@@ -14,6 +14,9 @@ public class UIController : MonoBehaviour {
 	public Image charImg;
 	public Button attackButton;
 
+	public Text hpValue;
+	public Text mpValue;
+
 	private HUDData currentHeroData;
 
 	void Start()
@@ -42,5 +45,8 @@ public class UIController : MonoBehaviour {
 		selectedHeroText.text = currentHeroData.Name;
 		
 		this.charImg.sprite = hudData.charImg;
+
+		this.hpValue.text = string.Format("{0}", hudData.HP);
+		this.mpValue.text = string.Format("{0}", hudData.MP);
 	}
 }

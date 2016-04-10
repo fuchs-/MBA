@@ -46,6 +46,12 @@ public class Entity : MonoBehaviour {
 
 	//--------------------------------------------------End of Entity stats
 
+	public virtual void Initialize()
+	{
+		hp = maxHP;
+		mp = maxMP;
+	}
+
 	public virtual void takeDamage(Damage d)
 	{
 		hp -= d.value;

@@ -83,8 +83,10 @@ public class Hero : Entity {
 
 	//--------------------------------------------------End of Hero stats
 
-	public void Initialize()
+	public override void Initialize()
 	{
+		base.Initialize ();
+
 		//Getting map coordinates based on position
 		this.x = Mathf.FloorToInt(this.transform.position.x);
 		this.y = Mathf.FloorToInt(this.transform.position.y);

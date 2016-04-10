@@ -1,13 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Controller\HeroesController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Entities\Hero.cs">
     <Files>
-      <File FileName="Assets\Scripts\Entities\Hero.cs" Line="86" Column="9" />
+      <File FileName="Assets\Scripts\Controller\UIController.cs" Line="50" Column="56" />
+      <File FileName="Assets\Scripts\Controller\GameController.cs" Line="36" Column="35" />
+      <File FileName="Assets\Scripts\Entities\Hero.cs" Line="94" Column="35" />
       <File FileName="Assets\Scripts\Misc\HUDData.cs" Line="20" Column="29" />
-      <File FileName="Assets\Scripts\Controller\UIController.cs" Line="44" Column="3" />
-      <File FileName="Assets\Scripts\Controller\GameController.cs" Line="29" Column="34" />
-      <File FileName="Assets\Scripts\Controller\HeroesController.cs" Line="27" Column="61" />
-      <File FileName="Assets\Scripts\Controller\MapController.cs" Line="46" Column="27" />
+      <File FileName="Assets\Scripts\Entities\Entity.cs" Line="52" Column="14" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
