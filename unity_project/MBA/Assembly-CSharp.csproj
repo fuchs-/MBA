@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\Misc\Damage.cs" />
      <Compile Include="Assets\Scripts\Misc\HUDData.cs" />
      <Compile Include="Assets\Scripts\Misc\Position.cs" />
+     <Compile Include="Assets\Scripts\Tiles\MapPositionData.cs" />
      <Compile Include="Assets\Scripts\Tiles\Tile.cs" />
      <Compile Include="Assets\Scripts\Tiles\TileCreationData.cs" />
      <Compile Include="Assets\Scripts\Tiles\TileFactory.cs" />

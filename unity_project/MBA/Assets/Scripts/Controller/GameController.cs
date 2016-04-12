@@ -13,8 +13,7 @@ public class GameController : MonoBehaviour {
 	/// </summary>
 	public static GameController gameController;
 
-	public Hero selectedHero
-	;
+	public Hero selectedHero;
 	GameStates gameState;
 
 	void Start()
@@ -29,16 +28,36 @@ public class GameController : MonoBehaviour {
 		gameState = GameStates.StandBy;
 	}
 
-	public void HeroClicked(Hero h)
-	{
-		if (gameState == GameStates.Attacking) {
-			selectedHero.attack (h);
-			gameState = GameStates.StandBy;
-		} 
-		else {
-			selectedHero = h;
 
-			UIController.UI.updateHeroData (h.getHUDData ());
+	public void MouseClickedAtPosition(Position position)
+	{
+		MapPositionData posData = MapController.mapController.getMapPositionData (position);
+
+		if (posData == null) {
+			//Mouse was clicked outside of the map
+			Debug.Log("Mouse clicked outside of the map");
+			return;
+		}
+
+		if (posData.isEmpty ()) {
+			selectedHero = null;
+			UIController.UI.updateHeroData (new HUDData ());
+
+			if (gameState == GameStates.Attacking)
+				gameState = GameStates.StandBy;
+		} else 
+		{
+			//TODO: check for effects
+
+			if (gameState == GameStates.Attacking) {
+				//TODO: check if its an Entity
+				selectedHero.attack (posData.hero);
+				gameState = GameStates.StandBy;
+			} else 
+			{
+				selectedHero = posData.hero;
+				UIController.UI.updateHeroData (posData.hero.getHUDData ());
+			}
 		}
 	}
 

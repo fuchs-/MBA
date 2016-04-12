@@ -48,22 +48,12 @@ public class MapController : MonoBehaviour {
 		tileHighlightPrefab = (GameObject) Resources.Load ("TileHighlight");
 	}
 
-	public void MouseClickedAtPosition(Position p)
+	public MapPositionData getMapPositionData(Position p)
 	{
-		Hero h;
-		h = heroes.getHeroAtPosition (p);
+		if ((p.x < 0) || (p.x > width) || (p.y < 0) || (p.y > height))
+			return null;
 
-		//There's a hero at this position, I should tell the GameController
-		if (h) {
-			GameController.gameController.HeroClicked (h);
-		} else {
-			//TODO: check for other stuff like movement or other entities
-			//For now, I'll just unselect the hero
-
-
-			GameController.gameController.selectedHero = null; // This should PROOOOBABLY not be here (Probably should be done in GameController)
-			UIController.UI.updateHeroData(new HUDData());
-		}
+		return new MapPositionData (p, tileMap.getTile (p), heroes.getHeroAtPosition (p));
 	}
 
 

@@ -77,7 +77,8 @@ public class MouseController : MonoBehaviour {
 				//clicked a position on the map
 				//Debug.Log("Clicked " + lastMouseButtonDown.ToString());
 
-				MapController.mapController.MouseClickedAtPosition (lastMouseButtonDown);
+				//Let the GameController handle the click on the map
+				GameController.gameController.MouseClickedAtPosition (lastMouseButtonDown);
 			}
 		}
 	}

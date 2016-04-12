@@ -70,6 +70,8 @@ public class TileMapController : MonoBehaviour {
 		}
 	}
 
+	public Tile getTile(Position p) { return getTile (p.x, p.y); }
+
 	//THIS IS COMPLETELY TEMPORARY
 	public void setExampleStartingPosition()
 	{

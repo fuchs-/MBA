@@ -131,6 +131,13 @@ public class Hero : Entity {
 		//I guess I'm gonna have a static dictionary where the key is hero level and the value is the necessary experience
 	}
 
+	public override void takeDamage (Damage d)
+	{
+		base.takeDamage (d);
+
+		updateHUDData ();
+	}
+
 	private void updateHUDData()
 	{
 		hudData.HP = this.HP;
