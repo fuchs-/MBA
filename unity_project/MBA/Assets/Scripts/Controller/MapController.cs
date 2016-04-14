@@ -50,12 +50,16 @@ public class MapController : MonoBehaviour {
 
 	public MapPositionData getMapPositionData(Position p)
 	{
-		if ((p.x < 0) || (p.x > width) || (p.y < 0) || (p.y > height))
+		if (!isInsideBounds(p))
 			return null;
 
 		return new MapPositionData (p, tileMap.getTile (p), heroes.getHeroAtPosition (p));
 	}
 
+	public bool isInsideBounds(Position p)
+	{
+		return !((p.x < 0) || (p.x > width) || (p.y < 0) || (p.y > height));
+	}
 
 	//Tile Highlighting
 	public void highlightPosition(Position position)

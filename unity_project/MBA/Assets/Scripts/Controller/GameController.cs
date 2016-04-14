@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour {
 
 	public Hero selectedHero;
 	GameStates gameState;
+	public Teams turn;
 
 	void Start()
 	{
@@ -26,18 +27,19 @@ public class GameController : MonoBehaviour {
 		gameController = this;
 
 		gameState = GameStates.StandBy;
+		turn = Teams.Red;
 	}
 
 
 	public void MouseClickedAtPosition(Position position)
 	{
-		MapPositionData posData = MapController.mapController.getMapPositionData (position);
-
-		if (posData == null) {
+		if (!MapController.mapController.isInsideBounds(position)) {
 			//Mouse was clicked outside of the map
 			Debug.Log("Mouse clicked outside of the map");
 			return;
 		}
+
+		MapPositionData posData = MapController.mapController.getMapPositionData (position);
 
 		if (posData.isEmpty ()) {
 			selectedHero = null;
@@ -67,5 +69,17 @@ public class GameController : MonoBehaviour {
 			gameState = GameStates.StandBy;
 		else
 			gameState = GameStates.Attacking;
+	}
+
+	public void NextTurn()
+	{
+		if (turn == Teams.Red)
+			turn = Teams.Blue;
+		else
+			turn = Teams.Red;
+
+		Debug.Log (turn.ToString () + " team's turn");
+
+		//TODO: alert people that turn is passing
 	}
 }
