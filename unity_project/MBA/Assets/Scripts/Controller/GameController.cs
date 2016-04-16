@@ -81,5 +81,6 @@ public class GameController : MonoBehaviour {
 		Debug.Log (turn.ToString () + " team's turn");
 
 		//TODO: alert people that turn is passing
+		UIController.UI.passingTurn();
 	}
 }

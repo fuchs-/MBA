@@ -12,10 +12,15 @@ public class UIController : MonoBehaviour {
 	//Bottom HUD Elements
 	public Text selectedHeroText;
 	public Image charImg;
-	public Button attackButton;
 
 	public Text hpValue;
 	public Text mpValue;
+
+	public Button attackButton;
+	public Button nextTurnButton;
+
+	public Color blueTeamColor;
+	public Color redTeamColor;
 
 	private HUDData currentHeroData;
 
@@ -48,5 +53,13 @@ public class UIController : MonoBehaviour {
 
 		this.hpValue.text = string.Format("{0}", hudData.HP);
 		this.mpValue.text = string.Format("{0}", hudData.MP);
+	}
+
+	public void passingTurn()
+	{
+		if (GameController.gameController.turn == Teams.Blue)
+			nextTurnButton.GetComponent<Image> ().color = blueTeamColor;
+		else
+			nextTurnButton.GetComponent<Image> ().color = redTeamColor;
 	}
 }
