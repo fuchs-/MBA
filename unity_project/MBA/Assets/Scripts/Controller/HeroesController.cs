@@ -2,7 +2,14 @@
 
 public class HeroesController : MonoBehaviour {
 
+	//List of all heroes in the match
 	private Hero[] heroes;
+
+	//Lists of heroes on each team
+	//These could change from arrays to lists or maybe an encapsulating class "Team" or "HeroListController" or something like that
+	private Hero[] redTeam;
+	private Hero[] blueTeam;
+
 
 	private int[,] heroMap;
 	private int width, height;
@@ -22,10 +29,26 @@ public class HeroesController : MonoBehaviour {
 	{
 		heroes = new Hero[transform.childCount];
 
+		redTeam = new Hero[heroes.Length / 2];
+		blueTeam = new Hero[heroes.Length / 2];
+
+		Hero h;
+
+		int r, b; //red and blue teams indexes
+		r = 0;
+		b = 0;
+
 		for (int i = 0; i < heroes.Length; i++) {
 			
-			heroes [i] = transform.GetChild (i).GetComponent<Hero>();
-			heroes [i].Initialize ();
+			h = transform.GetChild (i).GetComponent<Hero>();
+			h.Initialize ();
+
+			heroes [i] = h;
+
+			if (h.team == Teams.Red)
+				redTeam [r++] = h;
+			else
+				blueTeam [b++] = h;
 		}
 	}
 

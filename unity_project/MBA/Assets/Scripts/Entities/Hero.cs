@@ -107,7 +107,7 @@ public class Hero : Entity {
 		//HUD STUFF
 		charImg = Resources.Load<Sprite>("Heroes/" + gameObject.name + "/char");
 
-		hudData = new HUDData (gameObject.name);
+		hudData = new HUDData (gameObject.name, team);
 
 		updateHUDData ();
 	}

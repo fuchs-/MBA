@@ -5,10 +5,11 @@
 /// </summary>
 public class HUDData {
 
-	private string name;
-	public string Name { get { return name; } }
+	public string name { get; private set; }
 
 	public Sprite charImg;
+
+	public Teams team { get; private set; }
 
 	public int HP;
 	public int maxHP;
@@ -17,14 +18,15 @@ public class HUDData {
 
 	public bool isEmpty { get; private set; }
 
-	public HUDData(string name)
+	public HUDData(string name, Teams team)
 	{
 		this.name = name;
+		this.team = team;
 
 		isEmpty = false;
 	}
 
-	public HUDData() : this("No Hero Selected") 
+	public HUDData() : this("No Hero Selected", Teams.None) 
 	{
 		isEmpty = true;
 	}

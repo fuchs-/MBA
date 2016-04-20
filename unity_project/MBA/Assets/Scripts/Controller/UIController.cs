@@ -32,6 +32,8 @@ public class UIController : MonoBehaviour {
 		}
 
 		UI = this;
+
+		updateHeroData (new HUDData ());
 	}
 
 	void Update () {
@@ -42,12 +44,10 @@ public class UIController : MonoBehaviour {
 	{
 		currentHeroData = hudData;
 
-		if (hudData.isEmpty)
-			attackButton.interactable = false;
-		else
-			attackButton.interactable = true;
+		checkAttackButton ();
+		
 
-		selectedHeroText.text = currentHeroData.Name;
+		selectedHeroText.text = currentHeroData.name;
 		
 		this.charImg.sprite = hudData.charImg;
 
@@ -61,5 +61,16 @@ public class UIController : MonoBehaviour {
 			nextTurnButton.GetComponent<Image> ().color = blueTeamColor;
 		else
 			nextTurnButton.GetComponent<Image> ().color = redTeamColor;
+
+		checkAttackButton ();
+	}
+
+	//this checks if the attack button should be active or not
+	private void checkAttackButton()
+	{
+		if (currentHeroData.isEmpty || currentHeroData.team != GameController.gameController.turn)
+			attackButton.interactable = false;
+		else
+			attackButton.interactable = true;
 	}
 }

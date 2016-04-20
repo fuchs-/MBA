@@ -27,7 +27,9 @@ public class GameController : MonoBehaviour {
 		gameController = this;
 
 		gameState = GameStates.StandBy;
+
 		turn = Teams.Red;
+		UIController.UI.passingTurn();
 	}
 
 
