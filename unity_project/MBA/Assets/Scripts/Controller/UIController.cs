@@ -11,6 +11,7 @@ public class UIController : MonoBehaviour {
 
 	//Bottom HUD Elements
 	public Text selectedHeroText;
+	public Image charImgTeamHighlight;
 	public Image charImg;
 
 	public Text hpValue;
@@ -21,6 +22,7 @@ public class UIController : MonoBehaviour {
 
 	public Color blueTeamColor;
 	public Color redTeamColor;
+	public Color noTeamColor;
 
 	private HUDData currentHeroData;
 
@@ -32,7 +34,10 @@ public class UIController : MonoBehaviour {
 		}
 
 		UI = this;
+	}
 
+	public void Initialize()
+	{
 		updateHeroData (new HUDData ());
 	}
 
@@ -43,16 +48,16 @@ public class UIController : MonoBehaviour {
 	public void updateHeroData(HUDData hudData)
 	{
 		currentHeroData = hudData;
-
-		checkAttackButton ();
 		
 
 		selectedHeroText.text = currentHeroData.name;
-		
 		this.charImg.sprite = hudData.charImg;
 
 		this.hpValue.text = string.Format("{0}", hudData.HP);
 		this.mpValue.text = string.Format("{0}", hudData.MP);
+
+		checkAttackButton ();
+		checkTeamHighlight ();
 	}
 
 	public void passingTurn()
@@ -63,6 +68,7 @@ public class UIController : MonoBehaviour {
 			nextTurnButton.GetComponent<Image> ().color = redTeamColor;
 
 		checkAttackButton ();
+		checkTeamHighlight ();
 	}
 
 	//this checks if the attack button should be active or not
@@ -72,5 +78,17 @@ public class UIController : MonoBehaviour {
 			attackButton.interactable = false;
 		else
 			attackButton.interactable = true;
+	}
+
+	private void checkTeamHighlight()
+	{
+		if (currentHeroData.team == GameController.gameController.turn) {
+			if (currentHeroData.team == Teams.Blue)
+				charImgTeamHighlight.color = blueTeamColor;
+			else
+				charImgTeamHighlight.color = redTeamColor;
+		} else {
+			charImgTeamHighlight.color = noTeamColor;
+		}
 	}
 }

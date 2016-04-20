@@ -84,8 +84,8 @@ public class TileMapController : MonoBehaviour {
 			}
 		}
 	}
-
-	//THIS IS COMPLETELY TEMPORARY
+		
+	/*	OLD
 	public void randomizeTiles()
 	{
 		for (int x = 0; x < width; x++) {
@@ -97,4 +97,5 @@ public class TileMapController : MonoBehaviour {
 			}
 		}
 	}
+	*/
 }
