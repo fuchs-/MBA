@@ -39,6 +39,8 @@ public class UIController : MonoBehaviour {
 	public void Initialize()
 	{
 		updateHeroData (new HUDData ());
+		GameController.gameController.registerTurnChangeCallback (passingTurn);
+		passingTurn ();
 	}
 
 	void Update () {

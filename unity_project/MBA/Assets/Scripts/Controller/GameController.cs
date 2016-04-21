@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 public enum GameStates
 {
@@ -15,7 +16,10 @@ public class GameController : MonoBehaviour {
 
 	public Hero selectedHero;
 	GameStates gameState;
-	public Teams turn;
+	public Teams turn { get; private set; }
+
+
+	Action passingTurn;
 
 	void Start()
 	{
@@ -60,7 +64,7 @@ public class GameController : MonoBehaviour {
 			} else 
 			{
 				selectedHero = posData.hero;
-				UIController.UI.updateHeroData (posData.hero.getHUDData ());
+				UIController.UI.updateHeroData (selectedHero.getHUDData ());
 			}
 		}
 	}
@@ -82,7 +86,11 @@ public class GameController : MonoBehaviour {
 
 		Debug.Log (turn.ToString () + " team's turn");
 
-		//TODO: alert people that turn is passing
-		UIController.UI.passingTurn();
+		passingTurn();
+	}
+
+	public void registerTurnChangeCallback(Action cb)
+	{
+		passingTurn += cb;
 	}
 }
