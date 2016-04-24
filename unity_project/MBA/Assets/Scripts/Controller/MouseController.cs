@@ -59,10 +59,7 @@ public class MouseController : MonoBehaviour {
 	{
 		camera.orthographicSize -= Input.mouseScrollDelta.y * zoomSpeed;
 
-		if (camera.orthographicSize > minZoom)
-			camera.orthographicSize = minZoom;
-		if (camera.orthographicSize < maxZoom)
-			camera.orthographicSize = maxZoom;
+		camera.orthographicSize = Mathf.Clamp(camera.orthographicSize, maxZoom, minZoom);
 	}
 
 	private void checkMouseClick()

@@ -94,9 +94,9 @@ public class Hero : Entity {
 		GameObject teamHighlight = null;
 
 		if (this.team == Teams.Blue)
-			teamHighlight = (GameObject)Instantiate (Resources.Load ("BlueTeamHighlight"), this.transform.position, Quaternion.identity);
+			teamHighlight = (GameObject)Instantiate (Resources.Load ("UI/BlueTeamHighlight"), this.transform.position, Quaternion.identity);
 		if (this.team == Teams.Red)
-			teamHighlight = (GameObject)Instantiate (Resources.Load ("RedTeamHighlight"), this.transform.position, Quaternion.identity);
+			teamHighlight = (GameObject)Instantiate (Resources.Load ("UI/RedTeamHighlight"), this.transform.position, Quaternion.identity);
 
 		if (teamHighlight) {
 			teamHighlight.name = "TeamHighlight";

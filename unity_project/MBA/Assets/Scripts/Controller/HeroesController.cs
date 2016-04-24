@@ -81,4 +81,13 @@ public class HeroesController : MonoBehaviour {
 
 		return heroes [heroIndex];
 	}
+
+	public void updateMovementArray(int[,] array)
+	{
+		foreach (Hero h in heroes) 
+		{
+			array [h.x, h.y] = 0;
+		}
+
+	}
 }

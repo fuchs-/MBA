@@ -9,18 +9,7 @@ public class TileMapController : MonoBehaviour {
 
 	private int width, height;
 
-	void Start()
-	{
-		/* This used to be a singleton, now it's on the MapController
-		//THERE CAN BE ONLY ONE
-		if (tileMapController != null && tileMapController != this) {
-			Destroy (gameObject);
-			return;
-		}
-
-		tileMapController = this;
-		*/
-	}
+	void Start() { }
 
 	public void CreateTileMap()
 	{
@@ -72,6 +61,18 @@ public class TileMapController : MonoBehaviour {
 
 	public Tile getTile(Position p) { return getTile (p.x, p.y); }
 
+
+	//Movement stuff
+	public void populateMovementArray(int[,] array)
+	{
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				array [x, y] = tiles [x, y].getMovementSpeed ();
+			}
+		}
+	}
+
+
 	//THIS IS COMPLETELY TEMPORARY
 	public void setExampleStartingPosition()
 	{
@@ -84,18 +85,5 @@ public class TileMapController : MonoBehaviour {
 			}
 		}
 	}
-		
-	/*	OLD
-	public void randomizeTiles()
-	{
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < height; y++) {
-				if (Random.Range (0, 2) == 1)
-					changeTileAtPosition (x, y, TileTypes.Floor);
-				else
-					changeTileAtPosition (x, y, TileTypes.Water);
-			}
-		}
-	}
-	*/
+
 }

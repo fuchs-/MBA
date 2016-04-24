@@ -14,6 +14,8 @@ public class MapController : MonoBehaviour {
 	public TileMapController tileMap;
 	public HeroesController heroes;
 
+	//For now, recalculated every time player clicks the move button
+	private MovementGraph movementGraph;
 
 	//Tile Highlighting
 	private GameObject tileHighlightPrefab;
@@ -45,7 +47,7 @@ public class MapController : MonoBehaviour {
 		tileMap.CreateTileMap ();
 		heroes.CreateHeroMap ();
 
-		tileHighlightPrefab = (GameObject) Resources.Load ("TileHighlight");
+		tileHighlightPrefab = (GameObject) Resources.Load ("UI/TileHighlight");
 	}
 
 	public MapPositionData getMapPositionData(Position p)
@@ -60,6 +62,44 @@ public class MapController : MonoBehaviour {
 	{
 		return !((p.x < 0) || (p.x > width) || (p.y < 0) || (p.y > height));
 	}
+
+
+	//Movement stuff
+
+	public void moveHeroToPosition(Hero h, Position p)
+	{
+		if (!isInsideBounds (p))
+			return;
+	}
+
+	public void rebuildMovementGraph(Position origin)
+	{
+		movementGraph = new MovementGraph ();
+		movementGraph.build (origin, buildMovementArray ());
+	}
+
+	private int[,] buildMovementArray()
+	{
+		//Path for this method:
+		//1. Tile Map starts the array
+		//2. Effects (coming soon)
+		//3. Entities (coming soon)
+		//4. Heroes
+
+		int[,] movementArray;
+
+		movementArray = new int[width, height];
+
+		tileMap.populateMovementArray (movementArray);
+
+		//TODO: ask effects and entities to update the array here
+
+		heroes.updateMovementArray (movementArray);
+
+
+		return movementArray;
+	}
+
 
 	//Tile Highlighting
 	public void highlightPosition(Position position)

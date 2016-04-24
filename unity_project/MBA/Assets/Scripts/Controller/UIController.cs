@@ -18,6 +18,7 @@ public class UIController : MonoBehaviour {
 	public Text mpValue;
 
 	public Button attackButton;
+	public Button moveButton;
 	public Button nextTurnButton;
 
 	public Color blueTeamColor;
@@ -40,14 +41,25 @@ public class UIController : MonoBehaviour {
 	{
 		updateHeroData (new HUDData ());
 		GameController.gameController.registerTurnChangeCallback (passingTurn);
+		GameController.gameController.registerHeroChangeCallback (selectedHeroChanging);
 		passingTurn ();
+		selectedHeroChanging (null);
 	}
 
 	void Update () {
 
 	}
 
-	public void updateHeroData(HUDData hudData)
+	public void selectedHeroChanging(Hero h)
+	{
+		if (h == null) {
+			updateHeroData (new HUDData ());
+		} else {
+			updateHeroData (h.getHUDData ());
+		}
+	}
+
+	private void updateHeroData(HUDData hudData)
 	{
 		currentHeroData = hudData;
 		
@@ -58,7 +70,7 @@ public class UIController : MonoBehaviour {
 		this.hpValue.text = string.Format("{0}", hudData.HP);
 		this.mpValue.text = string.Format("{0}", hudData.MP);
 
-		checkAttackButton ();
+		updateButtons ();
 		checkTeamHighlight ();
 	}
 
@@ -69,23 +81,26 @@ public class UIController : MonoBehaviour {
 		else
 			nextTurnButton.GetComponent<Image> ().color = redTeamColor;
 
-		checkAttackButton ();
+		updateButtons ();
 		checkTeamHighlight ();
 	}
 
 	//this checks if the attack button should be active or not
-	private void checkAttackButton()
+	private void updateButtons()
 	{
-		if (currentHeroData.isEmpty || currentHeroData.team != GameController.gameController.turn)
+		if (currentHeroData.isEmpty || currentHeroData.team != GameController.gameController.turn) {
 			attackButton.interactable = false;
-		else
+			moveButton.interactable = false;
+		} else {
 			attackButton.interactable = true;
+			moveButton.interactable = true;
+		}
 	}
 
 	private void checkTeamHighlight()
 	{
-		if (currentHeroData.team == GameController.gameController.turn) {
-			if (currentHeroData.team == Teams.Blue)
+		if (GameController.gameController.isHeroOnTurn ()) {
+			if (GameController.gameController.turn == Teams.Blue)
 				charImgTeamHighlight.color = blueTeamColor;
 			else
 				charImgTeamHighlight.color = redTeamColor;
