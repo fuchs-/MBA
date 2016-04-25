@@ -27,35 +27,36 @@ public class Tile {
 
 	public TileTypes type { get; private set; }
 
-	//MOVEMENT SPEED - INT 0-4
-	//if 0 	- not walkable
-	//if 4	- Full speed
-	//1 - 25%
+	//MOVEMENT COST - INT 0-4
+	//if 4 	- not walkable
+	//if 0	- Full speed
+	//0 - 100%
+	//1 - 75%
 	//2 - 50%
-	//3 - 75%
-	//4 - 100%
-	private int movementSpeed;
+	//3 - 25%
+	//4 - 0%
+	private int movementCost;
 
-	protected int MovementSpeed
+	protected int MovementCost
 	{
-		get { return movementSpeed; }
+		get { return movementCost; }
 		set 
 		{
 			if (value < 0 || value > 4) {
-				Debug.LogError ("Trying to set out of bounds movementSpeed on tile at (" + x + "," + y + ")");
+				Debug.LogError ("Trying to set out of bounds movementCost on tile at (" + x + "," + y + ")");
 				return;
 			}
 
-			movementSpeed = value;
+			movementCost = value;
 		}
 	}
 
-	public virtual int getMovementSpeed()
+	public virtual int getMovementCost()
 	{
-		return MovementSpeed;
+		return MovementCost;
 	}
 
-	public virtual bool isWalkable() { return this.MovementSpeed > 0; }
+	public virtual bool isWalkable() { return this.MovementCost < 4; }
 
 	//Visual representation of this tile on the scene
 	private GameObject visualTile;
@@ -77,7 +78,7 @@ public class Tile {
 	{
 		this.x = x;
 		this.y = y;
-		this.movementSpeed = movementSpeed;
+		this.movementCost = movementSpeed;
 		this.type = type;
 		this.VisualTile = GameObject.Instantiate (visualPrefab);
 	}

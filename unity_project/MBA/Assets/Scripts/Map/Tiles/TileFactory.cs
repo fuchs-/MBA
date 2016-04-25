@@ -11,33 +11,33 @@ public class TileFactory {
 		tileData = new List<TileCreationData> ();
 	
 		TileCreationData tcd;
-		int moveSpeed;
+		int moveCost;
 		GameObject prefab;
 
 		foreach (TileTypes type in Enum.GetValues(typeof(TileTypes)))
 		{
 			switch (type) {
 			case TileTypes.Empty:
-				moveSpeed = 0;
+				moveCost = 4;
 				break;
 			case TileTypes.Floor:
-				moveSpeed = 4;
+				moveCost = 0;
 				break;
 			case TileTypes.Wall:
-				moveSpeed = 0;
+				moveCost = 4;
 				break;
 			case TileTypes.Water:
-				moveSpeed = 1;
+				moveCost = 3;
 				break;
 			default:
-				moveSpeed = 0;
+				moveCost = 4;
 				Debug.LogError ("Tile type: '" + type + "' not implemented on TileFactory.Initiate()");
 				break;
 			}
 
 			prefab = (GameObject) Resources.Load("Tiles/Tile" + type);
 
-			tcd = new TileCreationData (type, moveSpeed, prefab);
+			tcd = new TileCreationData (type, moveCost, prefab);
 			tileData.Add (tcd);
 		}
 	}

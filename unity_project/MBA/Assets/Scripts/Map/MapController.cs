@@ -76,6 +76,7 @@ public class MapController : MonoBehaviour {
 	{
 		movementGraph = new MovementGraph ();
 		movementGraph.build (origin, buildMovementArray ());
+		Pathfinder.Dijkstra (movementGraph);
 	}
 
 	private int[,] buildMovementArray()

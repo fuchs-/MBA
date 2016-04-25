@@ -86,7 +86,10 @@ public class HeroesController : MonoBehaviour {
 	{
 		foreach (Hero h in heroes) 
 		{
-			array [h.x, h.y] = 0;
+			if (h == GameController.gameController.selectedHero)
+				continue;
+			
+			array [h.x, h.y] = 4;
 		}
 
 	}

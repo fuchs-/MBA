@@ -67,7 +67,7 @@ public class TileMapController : MonoBehaviour {
 	{
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-				array [x, y] = tiles [x, y].getMovementSpeed ();
+				array [x, y] = tiles [x, y].getMovementCost ();
 			}
 		}
 	}
