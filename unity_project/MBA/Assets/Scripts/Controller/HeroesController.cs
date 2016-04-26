@@ -43,12 +43,14 @@ public class HeroesController : MonoBehaviour {
 			h = transform.GetChild (i).GetComponent<Hero>();
 			h.Initialize ();
 
-			heroes [i] = h;
-
 			if (h.team == Teams.Red)
 				redTeam [r++] = h;
 			else
 				blueTeam [b++] = h;
+
+			h.registerMovingCallback (heroMoving);
+
+			heroes [i] = h;
 		}
 	}
 
@@ -82,14 +84,19 @@ public class HeroesController : MonoBehaviour {
 		return heroes [heroIndex];
 	}
 
+	public void heroMoving(Entity e)
+	{
+		buildHeroMap ();
+	}
+
 	public void updateMovementArray(int[,] array)
 	{
-		foreach (Hero h in heroes) 
-		{
+		foreach (Hero h in heroes) 									//Making every position with a hero in it, not walkable
+		{															//Except for the selected hero
 			if (h == GameController.gameController.selectedHero)
 				continue;
 			
-			array [h.x, h.y] = 4;
+			array [h.x, h.y] = 5;
 		}
 
 	}

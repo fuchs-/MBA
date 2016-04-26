@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-public class Pathfinder 
+public class PathfinderDijkstra : MonoBehaviour 
 {
-	//Dijkstra stuff
-	public static Dictionary<MGraphNode, int> dist;
-	public static Dictionary<MGraphNode, MGraphNode> prev;
+	public Dictionary<MGraphNode, int> dist { get; private set;}
+	public Dictionary<MGraphNode, MGraphNode> prev { get; private set; }
 
-	public static void Dijkstra(MovementGraph graph)
+	private MGraphNode origin;
+	private MGraphNode goal;
+
+	public void Run(MovementGraph graph)
 	{
 		Stopwatch s = new Stopwatch();
 
@@ -17,7 +19,7 @@ public class Pathfinder
 		List<MGraphNode> Q = new List<MGraphNode>();		//Set of unvisited nodes
 		dist = new Dictionary<MGraphNode, int>();			//Distances to each node, from the origin
 		prev = new Dictionary<MGraphNode, MGraphNode>();	//Previous node to each node on the path
-		
+
 		foreach(MGraphNode v in graph.nodeArray)			//initializing sets
 		{
 			if (v == null)
@@ -50,11 +52,13 @@ public class Pathfinder
 		}
 
 		s.Stop ();
-
 		UnityEngine.Debug.Log ("Dijkstra's algorithm just finished taking " + s.ElapsedMilliseconds + " ms");
+
+		origin = graph.origin;
+		goal = graph.goal;
 	}
 
-	private static MGraphNode getLowestDistance(List<MGraphNode> l)
+	private MGraphNode getLowestDistance(List<MGraphNode> l)
 	{
 		MGraphNode ret;
 		int currValue;
@@ -72,4 +76,32 @@ public class Pathfinder
 		return ret;
 	}
 
+
+	//getting info about the last run(graph)
+
+	public int getGoalCost()
+	{
+		if (goal == null)
+			return -1;
+
+		return dist [goal];
+	}
+
+	public Stack<Position> getPath()
+	{
+		if (goal == null)
+			return null;
+		if (prev [goal] == null)
+			return null;
+
+		Stack<Position> path = new Stack<Position> ();
+		MGraphNode n = goal;
+
+		while (n != origin) {
+			path.Push (n.position);
+			n = prev [n];
+		}
+
+		return path;
+	}
 }

@@ -1,4 +1,11 @@
 ﻿using UnityEngine;
+using System;
+
+public enum EntityTypes
+{
+	Entity,
+	Hero
+}
 
 /// <summary>
 /// Any Entity in the battlefield
@@ -11,6 +18,9 @@ public class Entity : MonoBehaviour {
 	public int y { get; protected set; }
 	public Position position { get { return new Position (x, y); } }
 
+	Action<Entity> moving;
+
+	public virtual EntityTypes getEntityType() { return EntityTypes.Entity; }
 
 	//--------------------------------------------------Entity stats
 
@@ -69,6 +79,20 @@ public class Entity : MonoBehaviour {
 		e.takeDamage (this.makeDamageForEntity (e));
 	}
 
+	public void moveTo (Position p)
+	{
+		Vector3 newPosition = p.vector3;
+
+		newPosition.x += .5f;
+		newPosition.y += .5f;
+
+		this.transform.position = newPosition;
+		x = p.x;
+		y = p.y;
+
+		moving (this);
+	}
+
 	protected virtual Damage makeDamageForEntity(Entity e)
 	{
 		return new Damage (attackDamage, DamageTypes.Physical, this);
@@ -85,5 +109,10 @@ public class Entity : MonoBehaviour {
 	public bool isInAttackRange(Entity e)
 	{
 		return (Position.Distance (this.position, e.position) <= this.attackRange);
+	}
+
+	public void registerMovingCallback(Action<Entity> cb)
+	{
+		moving += cb;
 	}
 }

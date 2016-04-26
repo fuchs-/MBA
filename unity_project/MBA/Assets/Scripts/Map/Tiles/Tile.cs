@@ -27,14 +27,14 @@ public class Tile {
 
 	public TileTypes type { get; private set; }
 
-	//MOVEMENT COST - INT 0-4
-	//if 4 	- not walkable
-	//if 0	- Full speed
-	//0 - 100%
-	//1 - 75%
-	//2 - 50%
-	//3 - 25%
-	//4 - 0%
+	//MOVEMENT COST - INT 1-5
+	//if 5 	- not walkable
+	//if 1	- Full speed
+	//1 - 100%
+	//2 - 75%
+	//3 - 50%
+	//4 - 25%
+	//5 - 0%
 	private int movementCost;
 
 	protected int MovementCost
@@ -42,7 +42,7 @@ public class Tile {
 		get { return movementCost; }
 		set 
 		{
-			if (value < 0 || value > 4) {
+			if (value < 1 || value > 5) {
 				Debug.LogError ("Trying to set out of bounds movementCost on tile at (" + x + "," + y + ")");
 				return;
 			}
@@ -56,7 +56,7 @@ public class Tile {
 		return MovementCost;
 	}
 
-	public virtual bool isWalkable() { return this.MovementCost < 4; }
+	public virtual bool isWalkable() { return this.MovementCost < 5; }
 
 	//Visual representation of this tile on the scene
 	private GameObject visualTile;

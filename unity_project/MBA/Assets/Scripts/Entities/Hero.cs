@@ -11,6 +11,11 @@ public class Hero : Entity {
 
 	public Teams team;
 
+	public override EntityTypes getEntityType ()
+	{
+		return EntityTypes.Hero;
+	}
+
 	private HUDData hudData;
 	private Sprite charImg;
 

@@ -78,6 +78,7 @@ public class GameController : MonoBehaviour {
 			else if(gameState == GameStates.Moving) 
 			{
 				Debug.Log ("Can't move here");
+				gameState = GameStates.StandBy;
 			}
 		}
 	}

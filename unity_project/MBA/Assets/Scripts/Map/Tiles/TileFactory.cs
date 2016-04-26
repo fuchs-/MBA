@@ -18,19 +18,19 @@ public class TileFactory {
 		{
 			switch (type) {
 			case TileTypes.Empty:
-				moveCost = 4;
+				moveCost = 5;
 				break;
 			case TileTypes.Floor:
-				moveCost = 0;
+				moveCost = 1;
 				break;
 			case TileTypes.Wall:
-				moveCost = 4;
+				moveCost = 5;
 				break;
 			case TileTypes.Water:
-				moveCost = 3;
+				moveCost = 4;
 				break;
 			default:
-				moveCost = 4;
+				moveCost = 5;
 				Debug.LogError ("Tile type: '" + type + "' not implemented on TileFactory.Initiate()");
 				break;
 			}

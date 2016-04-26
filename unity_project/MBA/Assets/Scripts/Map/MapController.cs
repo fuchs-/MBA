@@ -14,8 +14,8 @@ public class MapController : MonoBehaviour {
 	public TileMapController tileMap;
 	public HeroesController heroes;
 
-	//For now, recalculated every time player clicks the move button
-	private MovementGraph movementGraph;
+	private MovementGraph movementGraph; 	//For now, recalculated every time player clicks the move button
+	private PathfinderDijkstra pathfinder;
 
 	//Tile Highlighting
 	private GameObject tileHighlightPrefab;
@@ -48,6 +48,8 @@ public class MapController : MonoBehaviour {
 		heroes.CreateHeroMap ();
 
 		tileHighlightPrefab = (GameObject) Resources.Load ("UI/TileHighlight");
+
+		pathfinder = new PathfinderDijkstra ();
 	}
 
 	public MapPositionData getMapPositionData(Position p)
@@ -70,13 +72,25 @@ public class MapController : MonoBehaviour {
 	{
 		if (!isInsideBounds (p))
 			return;
+
+		movementGraph.setGoal (p);
+		pathfinder.Run (movementGraph);
+
+		int cost = pathfinder.getGoalCost ();
+
+		if (cost == -1) 
+		{
+			Debug.Log ("Cant reach that position");
+			return;
+		}
+
+		h.moveTo (p);
 	}
 
 	public void rebuildMovementGraph(Position origin)
 	{
 		movementGraph = new MovementGraph ();
 		movementGraph.build (origin, buildMovementArray ());
-		Pathfinder.Dijkstra (movementGraph);
 	}
 
 	private int[,] buildMovementArray()

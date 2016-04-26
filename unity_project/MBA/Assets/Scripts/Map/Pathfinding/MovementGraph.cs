@@ -52,8 +52,8 @@ public class MovementGraph {
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
 
-				//if movement cost is 4, we can't walk there, so we don't add it to the graph
-				if (movementArray [x, y] == 4) 
+				//if movement cost is 5, we can't walk there, so we don't add it to the graph
+				if (movementArray [x, y] == 5) 
 					continue;
 
 				nodeArray [x, y] = new MGraphNode (new Position(x, y), movementArray [x, y]);
