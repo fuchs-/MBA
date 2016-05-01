@@ -33,6 +33,9 @@ public class Entity : MonoBehaviour {
 	public bool isMelee { get { return attackRange == 1; } }
 	public bool isRanged { get { return attackRange > 1; } }
 
+	public int moveSpeed;
+	private int currentMoveSpeed;
+
 	//------------------------
 
 	public int HP { get { return hp; } }
@@ -60,6 +63,12 @@ public class Entity : MonoBehaviour {
 	{
 		hp = maxHP;
 		mp = maxMP;
+		currentMoveSpeed = moveSpeed;
+	}
+
+	public virtual void passingTurn()
+	{
+		currentMoveSpeed = moveSpeed;
 	}
 
 	public virtual void takeDamage(Damage d)
@@ -78,7 +87,19 @@ public class Entity : MonoBehaviour {
 
 		e.takeDamage (this.makeDamageForEntity (e));
 	}
+		
+	public void moveTo (Position p, int cost)
+	{
+		if (cost > this.currentMoveSpeed) {
+			Debug.Log ("Can't move to position = '" + p + "' because cost is " + cost + " and currentMoveSpeed is " + currentMoveSpeed);
+		} else {
+			moveTo (p);
+			this.currentMoveSpeed -= cost;
+		}
+		
+	}
 
+	//Moves this hero to position p with no costs
 	public void moveTo (Position p)
 	{
 		Vector3 newPosition = p.vector3;

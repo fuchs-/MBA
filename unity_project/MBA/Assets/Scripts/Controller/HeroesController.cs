@@ -49,6 +49,7 @@ public class HeroesController : MonoBehaviour {
 				blueTeam [b++] = h;
 
 			h.registerMovingCallback (heroMoving);
+			GameController.gameController.registerTurnChangeCallback (h.passingTurn);
 
 			heroes [i] = h;
 		}

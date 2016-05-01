@@ -105,6 +105,8 @@ public class GameController : MonoBehaviour {
 		else
 			turn = Teams.Red;
 
+		gameState = GameStates.StandBy;
+
 		Debug.Log (turn.ToString () + " team's turn");
 
 		passingTurn();

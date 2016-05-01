@@ -78,13 +78,13 @@ public class MapController : MonoBehaviour {
 
 		int cost = pathfinder.getGoalCost ();
 
-		if (cost == -1) 
+		if (cost == -1) 														//goal cost -1 means pathfinder couldnt reach goal from the origin
 		{
 			Debug.Log ("Cant reach that position");
 			return;
 		}
 
-		h.moveTo (p);
+		h.moveTo (p, cost);
 	}
 
 	public void rebuildMovementGraph(Position origin)
