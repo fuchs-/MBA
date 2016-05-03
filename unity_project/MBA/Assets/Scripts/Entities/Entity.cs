@@ -18,7 +18,9 @@ public class Entity : MonoBehaviour {
 	public int y { get; protected set; }
 	public Position position { get { return new Position (x, y); } }
 
+	//Callbacks
 	Action<Entity> moving;
+	Action<Entity, Damage> dieing;
 
 	public virtual EntityTypes getEntityType() { return EntityTypes.Entity; }
 
@@ -111,7 +113,7 @@ public class Entity : MonoBehaviour {
 		x = p.x;
 		y = p.y;
 
-		moving (this);
+		if(moving != null) moving (this);
 	}
 
 	protected virtual Damage makeDamageForEntity(Entity e)
@@ -121,10 +123,9 @@ public class Entity : MonoBehaviour {
 
 	public virtual void diedFrom(Damage d)
 	{
-		//TODO: do things here
+		gameObject.SetActive (false);
 
-		//Im guessing we're gonna have an event system later
-		//So we'll probably send info about this death right here
+		if(dieing != null) dieing (this, d);
 	}
 
 	public bool isInAttackRange(Entity e)
@@ -135,5 +136,10 @@ public class Entity : MonoBehaviour {
 	public void registerMovingCallback(Action<Entity> cb)
 	{
 		moving += cb;
+	}
+
+	public void registerDieingCallback(Action<Entity, Damage> cb)
+	{
+		dieing += cb;
 	}
 }

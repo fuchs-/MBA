@@ -138,6 +138,8 @@ public class Hero : Entity {
 
 	public override void takeDamage (Damage d)
 	{
+		//TODO: apply dodge and damage reduction stuff
+
 		base.takeDamage (d);
 
 		updateHUDData ();
