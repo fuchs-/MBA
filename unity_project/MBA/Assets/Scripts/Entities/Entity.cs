@@ -34,7 +34,7 @@ public class Entity : MonoBehaviour {
 	public bool isRanged { get { return attackRange > 1; } }
 
 	public int moveSpeed;
-	private int currentMoveSpeed;
+	protected int currentMoveSpeed;
 
 	//------------------------
 
@@ -88,7 +88,7 @@ public class Entity : MonoBehaviour {
 		e.takeDamage (this.makeDamageForEntity (e));
 	}
 		
-	public void moveTo (Position p, int cost)
+	public virtual void moveTo (Position p, int cost)
 	{
 		if (cost > this.currentMoveSpeed) {
 			Debug.Log ("Can't move to position = '" + p + "' because cost is " + cost + " and currentMoveSpeed is " + currentMoveSpeed);

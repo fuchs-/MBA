@@ -11,10 +11,12 @@ public class HUDData {
 
 	public Teams team { get; private set; }
 
-	public int HP;
-	public int maxHP;
-	public int MP;
-	public int maxMP;
+	public int HP = 0;
+	public int maxHP = 0;
+	public int MP = 0;
+	public int maxMP = 0;
+	public int currentMS = 0;
+	public int MS = 0;
 
 	public bool isEmpty { get; private set; }
 

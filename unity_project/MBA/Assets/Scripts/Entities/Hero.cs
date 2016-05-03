@@ -143,6 +143,14 @@ public class Hero : Entity {
 		updateHUDData ();
 	}
 
+	public override void moveTo (Position p, int cost)
+	{
+		base.moveTo (p, cost);
+
+		updateHUDData ();
+
+	}
+
 	private void updateHUDData()
 	{
 		hudData.HP = this.HP;
@@ -150,6 +158,11 @@ public class Hero : Entity {
 		hudData.MP = this.MP;
 		hudData.maxMP = this.maxMP;
 		hudData.charImg = this.charImg;
+		hudData.currentMS = this.currentMoveSpeed;
+		hudData.MS = this.moveSpeed;
+
+		//Just in case this hero is currently selected
+		UIController.UI.refreshHUDValues ();
 	}
 
 	public HUDData getHUDData()

@@ -16,6 +16,7 @@ public class UIController : MonoBehaviour {
 
 	public Text hpValue;
 	public Text mpValue;
+	public Text msValue;
 
 	public Button attackButton;
 	public Button moveButton;
@@ -67,11 +68,17 @@ public class UIController : MonoBehaviour {
 		selectedHeroText.text = currentHeroData.name;
 		this.charImg.sprite = hudData.charImg;
 
-		this.hpValue.text = string.Format("{0}", hudData.HP);
-		this.mpValue.text = string.Format("{0}", hudData.MP);
+		refreshHUDValues ();
 
 		updateButtons ();
 		checkTeamHighlight ();
+	}
+
+	public void refreshHUDValues()
+	{
+		this.hpValue.text = string.Format("{0}", currentHeroData.HP);
+		this.mpValue.text = string.Format("{0}", currentHeroData.MP);
+		this.msValue.text = string.Format ("{0}/{1}", currentHeroData.currentMS, currentHeroData.MS);
 	}
 
 	public void passingTurn()
