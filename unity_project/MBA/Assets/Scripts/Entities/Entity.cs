@@ -98,7 +98,6 @@ public class Entity : MonoBehaviour {
 			moveTo (p);
 			this.currentMoveSpeed -= cost;
 		}
-		
 	}
 
 	//Moves this hero to position p with no costs
@@ -114,6 +113,16 @@ public class Entity : MonoBehaviour {
 		y = p.y;
 
 		if(moving != null) moving (this);
+	}
+
+	public virtual void spawnAt(Position p)
+	{
+		hp = maxHP;
+		mp = maxMP;
+		currentMoveSpeed = moveSpeed;
+
+		moveTo (p);
+		gameObject.SetActive (true);
 	}
 
 	protected virtual Damage makeDamageForEntity(Entity e)

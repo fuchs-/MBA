@@ -116,7 +116,7 @@ public class Hero : Entity {
 
 		updateHUDData ();
 	}
-
+		
 	private void levelUp()
 	{
 		level++;

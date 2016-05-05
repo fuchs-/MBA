@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\Map\MapController.cs" />
      <Compile Include="Assets\Scripts\Map\Pathfinding\MovementGraph.cs" />
      <Compile Include="Assets\Scripts\Map\Pathfinding\PathfinderDijkstra.cs" />
+     <Compile Include="Assets\Scripts\Map\SpawningController.cs" />
      <Compile Include="Assets\Scripts\Map\TileMapController.cs" />
      <Compile Include="Assets\Scripts\Map\Tiles\MapPositionData.cs" />
      <Compile Include="Assets\Scripts\Map\Tiles\Tile.cs" />

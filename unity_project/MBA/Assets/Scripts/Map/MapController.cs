@@ -60,6 +60,11 @@ public class MapController : MonoBehaviour {
 		return new MapPositionData (p, tileMap.getTile (p), heroes.getHeroAtPosition (p));
 	}
 
+	public bool isPositionEmpty(Position p)
+	{
+		return getMapPositionData (p).isEmpty ();
+	}
+
 	public bool isInsideBounds(Position p)
 	{
 		return !((p.x < 0) || (p.x > width) || (p.y < 0) || (p.y > height));
