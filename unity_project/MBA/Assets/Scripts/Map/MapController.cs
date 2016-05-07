@@ -21,6 +21,7 @@ public class MapController : MonoBehaviour {
 	private GameObject tileHighlightPrefab;
 	private GameObject tileHighlight;
 
+
 	void Start () {
 		//THERE CAN BE ONLY ONE
 		if (mapController != null && mapController != this) {

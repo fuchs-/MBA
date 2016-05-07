@@ -18,9 +18,12 @@ public class Entity : MonoBehaviour {
 	public int y { get; protected set; }
 	public Position position { get { return new Position (x, y); } }
 
+	public bool dead { get; protected set; }
+
 	//Callbacks
 	Action<Entity> moving;
 	Action<Entity, Damage> dieing;
+	Action<Entity> spawning;
 
 	public virtual EntityTypes getEntityType() { return EntityTypes.Entity; }
 
@@ -66,6 +69,8 @@ public class Entity : MonoBehaviour {
 		hp = maxHP;
 		mp = maxMP;
 		currentMoveSpeed = moveSpeed;
+
+		dead = false;
 	}
 
 	public virtual void passingTurn()
@@ -117,12 +122,13 @@ public class Entity : MonoBehaviour {
 
 	public virtual void spawnAt(Position p)
 	{
-		hp = maxHP;
-		mp = maxMP;
-		currentMoveSpeed = moveSpeed;
+		Initialize ();
 
 		moveTo (p);
+
 		gameObject.SetActive (true);
+
+		if (spawning != null) spawning (this);
 	}
 
 	protected virtual Damage makeDamageForEntity(Entity e)
@@ -133,6 +139,7 @@ public class Entity : MonoBehaviour {
 	public virtual void diedFrom(Damage d)
 	{
 		gameObject.SetActive (false);
+		dead = true;
 
 		if(dieing != null) dieing (this, d);
 	}
@@ -150,5 +157,10 @@ public class Entity : MonoBehaviour {
 	public void registerDieingCallback(Action<Entity, Damage> cb)
 	{
 		dieing += cb;
+	}
+
+	public void registerSpawningCallback(Action<Entity> cb)
+	{
+		spawning += cb;
 	}
 }

@@ -1,17 +1,19 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Map\SpawningController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Entities\Entity.cs">
     <Files>
-      <File FileName="Assets\Scripts\Entities\Entity.cs" Line="120" Column="5" />
-      <File FileName="Assets\Scripts\Entities\Hero.cs" Line="154" Column="3" />
-      <File FileName="Assets\Scripts\Map\SpawningController.cs" Line="72" Column="19" />
-      <File FileName="Assets\Scripts\Controller\HeroesController.cs" Line="24" Column="23" />
-      <File FileName="Assets\Scripts\Map\MapController.cs" Line="65" Column="44" />
+      <File FileName="Assets\Scripts\Map\MapController.cs" Line="121" Column="24" />
+      <File FileName="Assets\Scripts\Entities\Entity.cs" Line="90" Column="3" />
+      <File FileName="Assets\Scripts\Controller\HeroesController.cs" Line="106" Column="2" />
+      <File FileName="Assets\Scripts\Map\SpawningController.cs" Line="29" Column="2" />
       <File FileName="Assets\Scripts\Controller\GameController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Map\Pathfinding\MovementGraph.cs" Line="36" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\CLIENTE\Documents\Projects\MBA\unity_project\MBA\Assets\Scripts\Map\MapController.cs" line="118" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

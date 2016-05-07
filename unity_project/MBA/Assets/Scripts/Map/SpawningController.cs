@@ -20,6 +20,9 @@ public class SpawningPoolItem
 
 public class SpawningController 
 {
+	//Rounds it takes for a dead hero to respawn
+	private const int SPAWNING_TIME = 3;
+
 	//Spawning points
 	private List<Position> redSpawningPoints;
 	private List<Position> blueSpawningPoints;
@@ -44,20 +47,6 @@ public class SpawningController
 		spawningPool = new List<SpawningPoolItem>();
 
 		GameController.gameController.registerTurnChangeCallback (passingTurn);
-	}
-
-	//turn changing callback
-	public void passingTurn()
-	{
-		if (spawningPool.Count == 0)
-			return;
-
-		foreach (SpawningPoolItem i in spawningPool.ToArray()) {
-			if (i.shouldSpawnThisTurn ()) {
-				spawningPool.Remove (i);
-				spawnHero (i.hero);
-			}
-		}
 	}
 
 	private void spawnHero(Hero h)
@@ -90,5 +79,30 @@ public class SpawningController
 		}
 
 		return ret;
+	}
+
+	//turn changing callback
+	public void passingTurn()
+	{
+		if (spawningPool.Count == 0)
+			return;
+
+		foreach (SpawningPoolItem i in spawningPool.ToArray()) {
+			if (i.shouldSpawnThisTurn ()) {
+				spawningPool.Remove (i);
+				spawnHero (i.hero);
+			}
+		}
+	}
+
+	//hero dieing callback
+	public void entityDied(Entity e, Damage d)
+	{
+		if (e.getEntityType () == EntityTypes.Entity)
+			return;
+
+		Hero h = (Hero)e;
+
+		spawningPool.Add (new SpawningPoolItem (h, SPAWNING_TIME));
 	}
 }
